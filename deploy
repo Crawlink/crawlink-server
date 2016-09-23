@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo Installing dependencies ...
+npm install
+echo Installation success.
+
+echo Ready to start server. Starting ...
+pm2 start bin/www
+echo Server started successfully.
+
+echo Now changing the IPTable to redirect request from port 80 to 3000 ...
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
+echo server started at port 80
+echo Enjoy.
